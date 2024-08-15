@@ -12,6 +12,9 @@ import { ProductsIndexPage } from "./ProductsIndexPage";
 import { ProductsShowPage } from "./ProductsShowPage";
 import { OrdersIndexPage } from "./OrdersIndexPage";
 
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "mini-capstone-api-bvw6.onrender.com";
+
 const router = createBrowserRouter([
   {
     element: (
