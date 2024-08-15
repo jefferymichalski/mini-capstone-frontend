@@ -9,7 +9,7 @@ export function CartedProductsIndexPage() {
 
   const handleClick = () => {
     console.log("handleClick");
-    axios.post("http://localhost:3000/orders.json").then(() => {
+    axios.post("/orders.json").then(() => {
       navigate("/orders");
     });
   };

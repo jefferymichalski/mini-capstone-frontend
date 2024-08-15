@@ -7,13 +7,13 @@ export function ProductsShowPage() {
   const product = useLoaderData();
 
   const handleUpdate = (id, params) => {
-    axios.patch(`http://localhost:3000/products/${id}.json`, params).then(() => {
+    axios.patch(`/products/${id}.json`, params).then(() => {
       navigate("/products");
     });
   };
 
   const handleDestroy = (id) => {
-    axios.delete(`http://localhost:3000/products/${id}.json`).then(() => {
+    axios.delete(`/products/${id}.json`).then(() => {
       navigate("/products");
     });
   };

@@ -6,7 +6,7 @@ export function ProductsNewPage() {
   const navigate = useNavigate();
 
   const handleCreate = (params) => {
-    axios.post("http://localhost:3000/products.json", params).then((response) => {
+    axios.post("/products.json", params).then((response) => {
       console.log(response);
       navigate("/");
     });
