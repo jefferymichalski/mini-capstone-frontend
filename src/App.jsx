@@ -4,7 +4,6 @@ import { createBrowserRouter, useRouteError, Navigate, RouterProvider, Outlet } 
 
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { HomePage } from "./HomePage";
 import { SignupPage } from "./SignupPage";
 import { LoginPage } from "./LoginPage";
 import { ProductsNewPage } from "./ProductsNewPage";
@@ -29,7 +28,6 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorBoundary />,
     children: [
-      { path: "/", element: <HomePage /> },
       { path: "/signup", element: <SignupPage /> },
       { path: "/login", element: <LoginPage /> },
       {
