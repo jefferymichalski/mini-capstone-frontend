@@ -1,19 +1,20 @@
 import axios from "axios";
 
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, useRouteError, Navigate, RouterProvider, Outlet } from "react-router-dom";
 
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { HomePage } from "./Homepage";
+import { HomePage } from "./HomePage";
 import { SignupPage } from "./SignupPage";
-import { LoginPage } from "./Loginpage";
+import { LoginPage } from "./LoginPage";
 import { ProductsNewPage } from "./ProductsNewPage";
 import { ProductsIndexPage } from "./ProductsIndexPage";
 import { ProductsShowPage } from "./ProductsShowPage";
 import { OrdersIndexPage } from "./OrdersIndexPage";
+import { CartedProductsIndexPage } from "./CartedProductsIndexPage";
 
 axios.defaults.baseURL =
-  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "mini-capstone-api-bvw6.onrender.com";
+  process.env.NODE_ENV === "development" ? "http://localhost3000" : "mini-capstone-api-bvw6.onrender.com";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
         <Footer />
       </div>
     ),
+    errorElement: <ErrorBoundary />,
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/signup", element: <SignupPage /> },
@@ -46,9 +48,23 @@ const router = createBrowserRouter([
         element: <OrdersIndexPage />,
         loader: () => axios.get("/orders.json").then((response) => response.data),
       },
+      {
+        path: "/carted_products",
+        element: <CartedProductsIndexPage />,
+        loader: () => axios.get("/carted_products.json").then((response) => response.data),
+      },
     ],
   },
 ]);
+
+function ErrorBoundary() {
+  let error = useRouteError();
+  console.error("THE ERROR IS", error, error.response.status);
+  if (error?.response?.status === 401) {
+    return <Navigate to="/login" replace={true} />;
+  }
+  return <div>Dang!</div>;
+}
 
 function App() {
   return <RouterProvider router={router} />;
