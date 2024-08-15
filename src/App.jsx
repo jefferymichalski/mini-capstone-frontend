@@ -50,6 +50,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+function ErrorBoundary() {
+  let error = useRouteError();
+  console.error("THE ERROR IS", error, error.response.status);
+  if (error?.response?.status === 401) {
+    return <Navigate to="/login" replace={true} />;
+  }
+  return <div>Dang!</div>;
+}
+
 function App() {
   return <RouterProvider router={router} />;
 }
